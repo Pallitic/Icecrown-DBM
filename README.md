@@ -40,8 +40,11 @@ TTS voice cues =
 Lady Deathwhisper:
 
 Attempt to detect spirits target (not working until warmane fixes the spirits)
+
 Remove druid buff before first mc/After getting mc
+
 Auto weapons removal(Make a set with weapons and name it dps all lower case for reequip)
+
 timers adjusted
 
 TTS voice cues =
@@ -75,6 +78,7 @@ TTS voice cues =
 Professor putricide:
 
 Changed timers for first choking/malleable of every phase
+
 Timer for first green ooze in phase 1 adjusted.
 
 TTS voice cues =
@@ -91,6 +95,7 @@ TTS voice cues =
 Blood prince council:
 
 Roleplay timer
+
 Shadow Prison metronom to avoid any stacks (time your movements with the beeps)
 
 TTS voice cues =
@@ -122,6 +127,7 @@ TTS voice cues =
 The Lich king:
 
 Fixed timers for first defile,soulreaper,infest of every phase
+
 Removed useless timers when p3 starts
 
 TTS voice cues =
