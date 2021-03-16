@@ -1,24 +1,24 @@
 # Icecrown-DBM
 This DBM is Heavily copied from https://pastebin.com/raw/r2jXfj5L.
 
-- voice cues
+- Voice cues
 - Range Radar (Turns yellow if out of range but still may get hit)
 - Disable cinematics
-- auto combat log fix every 2seconds
-- difficulty announce after doing /dbm pull
+- Auto combat log fix every 2seconds
+- Difficulty announce after doing /dbm pull
 - Added new warnings and adjusted timers for Warmane-Icecrown realm.
 - Details phasing compability
 
-PS: all the features above can be disabled/reverted to the original dbm.
+PS: All the features above can be disabled/reverted to the original dbm.
 
 PS2: TTS can be turned off in general options or in boss options for specific ones.
 
-PS3: there is no localization for added features.
+PS3: There is no localization for added features.
 
 ----------------------------------------------------------------------
 ## Halion the twilight Destroyer:
 
-slow dps and stop dps special warnings at 40% and 30% corporeality
+Slow dps and stop dps special warnings at 40% and 30% corporeality
 
 TTS voice cues =
 - Debuff on you(ping)
@@ -43,7 +43,7 @@ Remove druid buff before first mc/After getting mc
 
 Auto weapons removal(Make a set with weapons and name it dps all lower case for reequip)
 
-timers adjusted
+Timers adjusted
 
 TTS voice cues =
 - Dominate mind countdown
@@ -56,7 +56,7 @@ TTS voice cues =
 ----------------------------------------------------------------------
 ## Deathbringer Saurfang:
 
-beasts timer adjusted.
+Beasts timer adjusted
 
 TTS voice cues = 
 - Beasts countdown
@@ -68,7 +68,7 @@ TTS voice cues =
 ## Festergut:
 
 TTS voice cues = 
-- gas spore on you
+- Gas spore on you
 - Malleable countdown(WIP)
 - Malleable goo summonn(WIP)
 
