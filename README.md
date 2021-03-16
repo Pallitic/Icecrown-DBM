@@ -1,9 +1,17 @@
 # Icecrown-DBM
-This DBM is Heavily copied from https://pastebin.com/raw/r2jXfj5L you can read most of the features there. added features and all the TTS is mentioned here.
+This DBM is Heavily copied from https://pastebin.com/raw/r2jXfj5L.
 
+- voice cues
+- Range Radar (Turns yellow if out of range but still may get hit)
 - Disable cinematics
+- auto combat log fix every 2seconds
+- difficulty announce after doing /dbm pull
 - Added new warnings and adjusted timers for Warmane-Icecrown realm.
 - Details phasing compability
+
+PS: all the features above can be disabled/reverted to the original dbm
+PS2: You can turn the voice cues off all together(Enable TTS in general options) or turn them off 1 by 1 in their boss options
+PS3: there is no localization for added features
 
 Here's some boss specific changes/voices cues:
 
@@ -29,18 +37,23 @@ TTS voice cues =
 ----------------------------------------------------------------------
 Lady Deathwhisper:
 
+Attempt to detect spirits target (not working until warmane fixes the spirits)
+Remove druid buff before first mc/After getting mc
+Auto weapons removal(Make a set with weapons and name it dps all lower case for reequip)
+timers adjusted
+
 TTS voice cues =
 - Dominate mind countdown
 - Adds countdown
 - Spirits spawn
 - Auto equip call
 - Auto unequip call
-- Spirits on you(not working until warmane fixes the spirits)
+- Spirits on you
 
 ----------------------------------------------------------------------
 Deathbringer Saurfang:
 
-timers adjusted.
+beasts timer adjusted.
 
 TTS voice cues = 
 - Beasts countdown
@@ -75,14 +88,15 @@ TTS voice cues =
 ----------------------------------------------------------------------
 Blood prince council:
 
-Roleplay timer.
+Roleplay timer
+Shadow Prison metronom to avoid any stacks (time your movements with the beeps)
 
 TTS voice cues =
 - Target switch countdown
 - Near vortex call
 - Flame orb on you
 - Empowered vortex cast
-- Shadow Prison metronom to avoid any stacks (time your movements with the beeps)
+
 
 ----------------------------------------------------------------------
 Blood Queen Lana'thel:
