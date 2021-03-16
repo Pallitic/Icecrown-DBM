@@ -11,7 +11,7 @@ This DBM is Heavily copied from https://pastebin.com/raw/r2jXfj5L.
 
 PS: all the features above can be disabled/reverted to the original dbm.
 
-PS2: You can turn the voice cues off all together(Enable TTS in general options) or turn them off 1 by 1 in their boss options.
+PS2: TTS can be turned off in general options or in boss options for specific ones.
 
 PS3: there is no localization for added features.
 
