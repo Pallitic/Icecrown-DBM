@@ -15,10 +15,8 @@ PS2: You can turn the voice cues off all together(Enable TTS in general options)
 
 PS3: there is no localization for added features.
 
-Here's some boss specific changes/voices cues:
-
 ----------------------------------------------------------------------
-Halion the twilight Destroyer:
+###### Halion the twilight Destroyer:
 
 slow dps and stop dps special warnings at 40% and 30% corporeality
 
@@ -30,14 +28,14 @@ TTS voice cues =
 - Stop dps(30%)
 
 ----------------------------------------------------------------------
-Lord Marrowgar:
+###### Lord Marrowgar:
 
 TTS voice cues =
 - Bone storm countdown
 - Casting bone spike
 
 ----------------------------------------------------------------------
-Lady Deathwhisper:
+###### Lady Deathwhisper:
 
 Attempt to detect spirits target (not working until warmane fixes the spirits)
 
@@ -56,7 +54,7 @@ TTS voice cues =
 - Spirits on you
 
 ----------------------------------------------------------------------
-Deathbringer Saurfang:
+###### Deathbringer Saurfang:
 
 beasts timer adjusted.
 
@@ -67,7 +65,7 @@ TTS voice cues =
 - Call for Shadowmeld if mark target (nightelf)
 
 ----------------------------------------------------------------------
-Festergut:
+###### Festergut:
 
 TTS voice cues = 
 - gas spore on you
@@ -75,7 +73,7 @@ TTS voice cues =
 - Malleable goo summonn(WIP)
 
 ----------------------------------------------------------------------
-Professor putricide:
+###### Professor putricide:
 
 Changed timers for first choking/malleable of every phase
 
@@ -92,7 +90,7 @@ TTS voice cues =
 - Red ooze on you
 
 ----------------------------------------------------------------------
-Blood prince council:
+###### Blood prince council:
 
 Roleplay timer
 
@@ -106,7 +104,7 @@ TTS voice cues =
 
 
 ----------------------------------------------------------------------
-Blood Queen Lana'thel:
+###### Blood Queen Lana'thel:
 
 TTS voice cues =
 - Bite countdown
@@ -114,7 +112,7 @@ TTS voice cues =
 - Swarming shadow on you
 
 ----------------------------------------------------------------------
-Sindragosa:
+###### Sindragosa:
 
 TTS voice cues =
 - Frost beacon on you
@@ -124,7 +122,7 @@ TTS voice cues =
 - Blistering cold countdown
 
 ----------------------------------------------------------------------
-The Lich king:
+###### The Lich king:
 
 Fixed timers for first defile,soulreaper,infest of every phase
 
