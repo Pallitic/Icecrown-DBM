@@ -126,7 +126,7 @@ TTS voice cues =
 
 Fixed timers for first defile,soulreaper,infest of every phase
 
-Now Shows special warning if necrotic jumps to another person
+Shows special warning if necrotic jumps to you
 
 Removed useless timers when p3 starts
 
