@@ -26,6 +26,14 @@ TTS voice cues =
 - Meteor countdown
 - Slow dps(40%)
 - Stop dps(30%)
+----------------------------------------------------------------------
+## Anub'arak:
+
+Removes all hp buffs when last phase starts
+Fixed some toc timers
+
+TTS voice cues =
+- Stun adds countdown
 
 ----------------------------------------------------------------------
 ## Lord Marrowgar:
