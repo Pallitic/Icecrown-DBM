@@ -1,4 +1,4 @@
-﻿local mod	= DBM:NewMod("Anub'arak_Coliseum", "DBM-Coliseum")
+local mod	= DBM:NewMod("Anub'arak_Coliseum", "DBM-Coliseum")
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 4435 $"):sub(12, -3))
@@ -16,8 +16,7 @@ mod:RegisterEvents(
 
 mod:SetUsedIcons(3, 4, 5, 6, 7, 8)
 
-
-mod:AddBoolOption("RemoveHealthBuffsInP3", false)
+mod:AddBoolOption("RemoveHealthBuffsInP3", not mod:IsTank())
 
 -- Adds
 local warnAdds				= mod:NewAnnounce("warnAdds", 3, 45419)
