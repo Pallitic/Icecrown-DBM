@@ -154,7 +154,7 @@ TTS voice cues =
 - Bite countdown
 - Pact of the darkfallen on you
 - Swarming shadow on you
-- Link soon
+- Pact of the darkfallen soon
 
 ----------------------------------------------------------------------
 ## Valithria Dreamwalker:
@@ -193,15 +193,20 @@ TTS voice cues =
 - Soulreaper soon(Heals+tanks only)
 - Soulreaper cast(Heals+tanks only)
 - Valkyrs soon
-- Harvest soul countdown
+- Harvest soul soon
 - Follow Mark inside Chamber
 
 ----------------------------------------------------------------------
 4/22/2021: This update is useful specially for frostmourne players.
+
 Naxx: Yoinked timers from frostmourne dbm. Added alot of TTS
+
 Ulduar: Exactly like Naxx fixed timers and TTS
+
 Toc: Added TTS. timers were mostly accurate
+
 Icc: added/changed alot of voice announcements. Fixed most of the overlaps. removed a few useless stuff
+
 i wont mention uld and naxx TTS 1by1, but the voice announcements should cover most of the major mechanics. i will keep updating them after their releases on frostmourne.
 
 Todo:
