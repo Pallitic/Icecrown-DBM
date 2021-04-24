@@ -37,20 +37,24 @@ Anub =
 - Anub chasing you
 - Slow healing last phase(heals only)
 - Adds Spawn(tanks only)
+
 valks =
 - Change color
 - Change target
 - Interupt
+
 jaraxxus =
 - Dispel nether
 - Portal soon
 - Volcano soon
 - Run out with fire
 - Interupt
+
 beasts =
 - Move out of fire
 - Move out of slime pool
 - Move out of Charge
+
 ----------------------------------------------------------------------
 ## Lord Marrowgar:
 
