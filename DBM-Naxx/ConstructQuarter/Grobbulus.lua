@@ -62,8 +62,8 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(28169) then
 		warnInjection:Show(args.destName)
 		timerInjection:Start(args.destName)
-		ttsInjection:Play()
 		if args:IsPlayer() then
+			ttsInjection:Play()
 			specWarnInjection:Show()
 			SendChatMessage("Mutating Injection on me!", "SAY")
 		end
