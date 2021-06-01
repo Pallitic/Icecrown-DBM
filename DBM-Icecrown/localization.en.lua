@@ -136,7 +136,8 @@ L:SetWarningLocalization{
 	WarnReanimating				= "Add reviving",			-- Reanimating an adherent or fanatic
 	WarnTouchInsignificance		= "%s on >%s< (%d)",		-- Touch of Insignificance on >args.destName< (args.amount)
 	WarnAddsSoon				= "New adds soon",
-	SpecWarnVengefulShade		= "Vengeful Shade attacking you - Run Away"--creatureid 38222
+	SpecWarnVengefulShade		= "Vengeful Shade attacking you - Run Away",		--creatureid 38222
+	SpecWarnDominate			= "Stop Cleave"
 }
 
 L:SetOptionLocalization{
@@ -144,13 +145,12 @@ L:SetOptionLocalization{
 	WarnReanimating				= "Show warning when an add is being revived",	-- Reanimated Adherent/Fanatic spawning
 	TimerAdds					= "Show timer for new adds",
 	SpecWarnVengefulShade		= "Show special warning when you are attacked by Vengeful Shade",--creatureid 38222
+	SpecWarnDominate			= "Show special warning to stop cleave on Dominate Cast",
 	ShieldHealthFrame			= "Show boss health with a health bar for $spell:70842",
 	WarnTouchInsignificance		= DBM_CORE_AUTO_ANNOUNCE_OPTIONS.spell:format(71204, GetSpellInfo(71204) or "unknown"),	
 	SetIconOnDominateMind		= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(71289),
 	SetIconOnDeformedFanatic	= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(70900),
-	SetIconOnEmpoweredAdherent	= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(70901),
-	PlayCountdownOnSummonAdds	= "Play countdown sound when adds are about to spawn",
-	PlayCountdownOnSummonSpirits = DBM_CORE_AUTO_ANNOUNCE_OPTIONS.countdown:format(71426, GetSpellInfo(71426) or "unknown")
+	SetIconOnEmpoweredAdherent	= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(70901)
 }
 
 L:SetMiscLocalization{
@@ -379,7 +379,8 @@ L:SetMiscLocalization{
 	Keleseth			= "Prince Keleseth",
 	Taldaram			= "Prince Taldaram",
 	Valanar				= "Prince Valanar",
-	EmpoweredFlames		= "Empowered Flames speed toward (%S+)!"
+	EmpoweredFlames		= "Empowered Flames speed toward (%S+)!",
+	FirstPull			= "Foolish mortals. You thought us defeated so easily? The San'layn are the Lich King's immortal soldiers! Now you shall face their might combined!"
 }
 
 -----------------------------
