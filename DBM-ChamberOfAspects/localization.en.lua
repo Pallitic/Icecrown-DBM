@@ -178,9 +178,8 @@ L:SetOptionLocalization({
 	SoundOnConsumption		= "Play sound on $spell:74562 or $spell:74792",--We use localized text for these functions
 	SetIconOnConsumption	= "Set icons on $spell:74562 or $spell:74792 targets",--So we can use single functions for both versions of spell.
 	YellOnConsumption		= "Yell on $spell:74562 or $spell:74792",
-	WhisperOnConsumption	= "Send whisper to $spell:74562 or $spell:74792\ntargets",
-	PlayCountdownOnMeteorStrike = DBM_CORE_AUTO_ANNOUNCE_OPTIONS.countdown:format(75952, GetSpellInfo(75952) or "unknown"),
-	PlayCountdownOnTwilightCutter	 = DBM_CORE_AUTO_ANNOUNCE_OPTIONS.countdown:format(77846, GetSpellInfo(77846) or "unknown")
+	YellOnCutter			= "Yell on $spell:74769",
+	WhisperOnConsumption	= "Send whisper to $spell:74562 or $spell:74792\ntargets"
 	
 })
 
@@ -192,8 +191,10 @@ L:SetMiscLocalization({
 	Phase3					= "I am the light and the darkness! Cower, mortals, before the herald of Deathwing!",
 	twilightcutter			= "The orbiting spheres pulse with dark energy!",
 	YellCombustion			= "Combustion on me!",
+	YellCutter				= "Twilight Cutter in 5 seconds! Adjust your position!",
 	WhisperCombustion		= "Combustion on you! Run to the wall!",
 	YellConsumption			= "Consumption on me!",
 	WhisperConsumption		= "Consumption on you! Run to the wall!",
+	Cutter					= "Beware the shadow!",
 	Kill					= "Relish this victory, mortals, for it will be your last. This world will burn with the master's return!"
 })
