@@ -40,12 +40,12 @@ local specWarnCorporealityStop		= mod:NewSpecialWarningSpellCorporeality(74833, 
 
 local ttsPing = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\ping.mp3", "TTS Ping when consumption on you", true)
 local ttsCutterIn5 = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\cuttercd.mp3", "TTS Cutter countdown", true)
-local ttsCutterIn5Offset = 6.5
-local ttsMeteorIn5 = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\meteorcd.mp3", "TTS Meteor countdown", true)
-local ttsMeteorIn5Offset = 7
+local ttsMeteor = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\meteor.mp3", "TTS Meteor cast", true)
+local ttsMeteorIn5 = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\meteorcd.mp3", "TTS Meteor countdown", false)
 local ttsSlow = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\slowdps.mp3", "TTS Slow dps", true)
 local ttsStop = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\stopdps.mp3", "TTS Stop dps", true)
-
+local ttsP2 = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\79percent.mp3", "TTS 79 Percent", true)
+local ttsP3 = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\rs\\54percent.mp3", "TTS 54 Percent", true)
 
 local timerShadowConsumptionCD		= mod:NewNextTimer(25, 74792)
 local timerFieryConsumptionCD		= mod:NewNextTimer(25, 74562)
@@ -60,10 +60,10 @@ local timerFieryBreathCD			= mod:NewCDTimer(19, 74526, nil, mod:IsTank() or mod:
 local berserkTimer					= mod:NewBerserkTimer(480)
 
 local soundConsumption 				= mod:NewSound(74562, "SoundOnConsumption")
-
+mod:AddBoolOption("YellOnCutter", true, "announce")
 mod:AddBoolOption("YellOnConsumption", true, "announce")
 mod:AddBoolOption("AnnounceAlternatePhase", true, "announce")
-mod:AddBoolOption("WhisperOnConsumption", false, "announce")
+mod:AddBoolOption("WhisperOnConsumption", true, "announce")
 mod:AddBoolOption("SetIconOnConsumption", true)
 
 local warned_preP2 = false
@@ -108,6 +108,7 @@ function mod:OnCombatStart(delay)--These may still need retuning too, log i had 
 	phase2Started = 0
 	lastflame = 0
 	lastshroud = 0
+	self.vb.phase = 1
 	berserkTimer:Start(-delay)
 	timerMeteorCD:Start(20-delay)
 	ttsMeteorIn5:Schedule(20-5, 5)
@@ -118,6 +119,7 @@ end
 
 function mod:OnCombatEnd()
 	ttsCutterIn5:Cancel()
+	ttsMeteorIn5:Cancel()
 end
 
 function mod:SPELL_CAST_START(args)
@@ -236,32 +238,43 @@ end
 function mod:UNIT_HEALTH(uId)
 	if not warned_preP2 and self:GetUnitCreatureId(uId) == 39863 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.79 then
 		warned_preP2 = true
-		warnPhase2Soon:Show()	
+		warnPhase2Soon:Show()
+		ttsP2:Play()
 	elseif not warned_preP3 and self:GetUnitCreatureId(uId) == 40142 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.54 then
 		warned_preP3 = true
 		warnPhase3Soon:Show()	
+		ttsP3:Play()
 	end
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
-	if msg == L.Phase2 or msg:find(L.Phase2) then
+	if msg == L.Cutter then
+		if self.Options.YellOnCutter then
+			SendChatMessage(L.YellCutter, "SAY")
+		end
+		ttsCutterIn5:Play()
+		--[[if mod:LatencyCheck() then
+			self:SendSync("Meteor")
+		end]]--
+	elseif msg == L.Phase2 or msg:find(L.Phase2) then
 		updateHealthFrame(2)
 		timerFieryBreathCD:Cancel()
 		timerMeteorCD:Cancel()
 		timerFieryConsumptionCD:Cancel()
 		warnPhase2:Show()
+		self.vb.phase = 2
 		timerShadowBreathCD:Start(25)
 		timerShadowConsumptionCD:Start(20)--not exact, 15 seconds from tank aggro, but easier to add 5 seconds to it as a estimate timer than trying to detect this
 		timerTwilightCutterCD:Start(35)
-		ttsCutterIn5:Schedule(35-ttsCutterIn5Offset)
 	elseif msg == L.Phase3 or msg:find(L.Phase3) then
 		self:SendSync("Phase3")
+		self.vb.phase = 3
 	elseif msg == L.MeteorCast or msg:find(L.MeteorCast) then--There is no CLEU cast trigger for meteor, only yell
 		if not self.Options.AnnounceAlternatePhase then
 			warningMeteor:Show()
 			lastMeteor = GetTime()
 			timerMeteorCast:Start()--7 seconds from boss yell the meteor impacts.
-			PlaySoundFile("Interface\\Addons\\DBM-Core\\sounds\\meteor.mp3")
+			ttsMeteor:Play()
 			timerMeteorCD:Start()
 			ttsMeteorIn5:Schedule(40-5, 5)
 		end
@@ -282,7 +295,6 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 			timerTwilightCutterCast:Start()
 			timerTwilightCutter:Schedule(5)--Delay it since it happens 5 seconds after the emote
 			timerTwilightCutterCD:Schedule(15)
-			ttsCutterIn5:Schedule(35-ttsCutterIn5Offset)
 		end
 	end
 		if mod:LatencyCheck() then
@@ -292,6 +304,11 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 end
 
 function mod:OnSync(msg, target)
+--[[	if msg == "Cutter" then
+		if self.Options.YellOnCutter then
+			SendChatMessage(L.YellCutter, "SAY")
+		end
+		ttsCutterIn5:Play() ]]--
 	if msg == "TwilightCutter" then
 		if self.Options.AnnounceAlternatePhase then
 			if GetTime() - lastshroud < 6 then
@@ -299,13 +316,12 @@ function mod:OnSync(msg, target)
 				timerTwilightCutterCast:Start()
 				timerTwilightCutter:Schedule(5)--Delay it since it happens 5 seconds after the emote
 				timerTwilightCutterCD:Schedule(15)
-				ttsCutterIn5:Schedule(35-ttsCutterIn5Offset)
 			end
 		end
 	elseif msg == "Meteor" then
 		if self.Options.AnnounceAlternatePhase then
 			warningMeteor:Show()
-			PlaySoundFile("Interface\\Addons\\DBM-Core\\sounds\\meteor.mp3")
+			ttsMeteor:Play()
 			timerMeteorCast:Start()
 			timerMeteorCD:Start()
 			lastMeteor = GetTime()
@@ -345,7 +361,7 @@ function mod:OnSync(msg, target)
 		updateHealthFrame(3)
 		warnPhase3:Show()
 		timerMeteorCD:Start(30) --These i'm not sure if they start regardless of drake aggro, or if it varies as well.
-			ttsMeteorIn5:Schedule(30-5, 5)
+		ttsMeteorIn5:Schedule(30-5, 5)
 		timerFieryConsumptionCD:Start(20)--not exact, 15 seconds from tank aggro, but easier to add 5 seconds to it as a estimate timer than trying to detect this
 	end
 end
