@@ -1,4 +1,4 @@
-﻿local mod	= DBM:NewMod("Anub'arak_Coliseum", "DBM-Coliseum")
+local mod	= DBM:NewMod("Anub'arak_Coliseum", "DBM-Coliseum")
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 4435 $"):sub(12, -3))
@@ -82,6 +82,7 @@ function mod:OnCombatStart(delay)
 	timerSubmerge:Start(80-delay)
 	enrageTimer:Start(-delay)
 	timerFreezingSlash:Start(-delay)
+	self.vb.phase = 1
 	if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
 		-- Does not work on warmane, use "Stun Adds!" timer instead
 		-- timerShadowStrike:Start()
@@ -103,40 +104,6 @@ function mod:nextStunTimer(duration)
 	TTSstun:Schedule(duration-stunTTSOffset)
 	self:ScheduleMethod(duration, "nextStunTimer")
 end
-
---[[ old implementation
--- set/reset on combatstart/combatend
-local stunCount = 0
-local stunTimerValues = {30, 30, 115, 30, 115, 30} -- for 2xburrow kill
-function mod:nextStunTimer()
-	self:UnscheduleMethod("nextStunTimer")
-	-- keep using the last when list exhausted
-	if stunCount < #stunTimerValues then
-		stunCount = stunCount + 1
-	end
-	local duration = stunTimerValues[stunCount]
-	if self.Options.BroadcastStunTimer then
-		DBM:CreatePizzaTimer(duration, "Stun Adds!", true)
-	end
-	stunTimer:Start(duration)
-	TTSstun:Schedule(duration-stunTTSOffset)
-	self:ScheduleMethod(duration, "nextStunTimer")
-end
---]]
-
---[[ older implementation
-function mod:nextStunTimer()
-	self:UnscheduleMethod("nextStunTimer")
-	local duration = stunTimerValues[1+(stunCount % #stunTimerValues)]
-	if self.Options.BroadcastStunTimer then
-		DBM:CreatePizzaTimer(duration, "Stun Adds!", true)
-	end
-	stunTimer:Start(duration)
-	TTSstun:Schedule(duration-stunTTSOffset)
-	self:ScheduleMethod(duration, "nextStunTimer")
-	stunCount = stunCount + 1
-end
---]]
 
 function mod:OnCombatEnd()
 	self:UnscheduleMethod("nextStunTimer")
@@ -237,6 +204,7 @@ function mod:SPELL_CAST_START(args)
 		timerEmerge:Stop()
 		timerSubmerge:Stop()
 		ttsChill:Play()
+		self.vb.phase = 2
 		if self.Options.RemoveHealthBuffsInP3 then
 			mod:ScheduleMethod(0.1, "RemoveBuffs")
 		end
@@ -282,4 +250,3 @@ function mod:RemoveBuffs()
 	CancelUnitBuff("player", (GetSpellInfo(48162)))		-- Prayer of Fortitude
 	CancelUnitBuff("player", (GetSpellInfo(69377)))		-- Runescroll of Fortitude
 end
-
