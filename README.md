@@ -22,8 +22,11 @@ TTS voice cues =
 - Debuff on you(ping)
 - Cutter countdown
 - Meteor countdown
+- Meteor cast
 - Slow dps(40%)
 - Stop dps(30%)
+- 79 Percent boss hp
+- 54 Percent boss hp
 ----------------------------------------------------------------------
 ## Trial of Crusader:
 
