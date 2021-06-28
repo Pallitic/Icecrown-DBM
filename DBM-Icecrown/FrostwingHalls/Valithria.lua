@@ -62,6 +62,7 @@ local AbomTimer = 60
 local blazingSkeleton = nil
 
 local ttsSuppressersSpawned = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\icc\\vdw\\suppressersSpawned.mp3", "TTS Supressers Spawned", mod:IsMelee() or mod:IsRanged())
+local ttsPortal = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\icc\\vdw\\portals.mp3", "TTS Portals Spawned", mod:IsHealer())
 
 local function warnGutSprayTargets()
 	warnGutSpray:Show(table.concat(GutSprayTargets, "<, >"))
@@ -144,6 +145,7 @@ end
 
 function mod:Portals()
 	warnPortal:Show()
+	ttsPortal:Play()
 	warnPortalOpen:Cancel()
 	timerPortalsOpen:Cancel()
 	warnPortalSoon:Cancel()
