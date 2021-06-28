@@ -1,4 +1,4 @@
-﻿local mod	= DBM:NewMod("Sindragosa", "DBM-Icecrown", 4)
+local mod	= DBM:NewMod("Sindragosa", "DBM-Icecrown", 4)
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 4438 $"):sub(12, -3))
@@ -56,9 +56,10 @@ local ttsHighChilledToBone = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\soun
 local ttsUnchained = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\icc\\sindy\\unchained.mp3", "TTS Unchained callout", true)
 local ttsFrostBreathCountdown = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\icc\\sindy\\breathcd.mp3", "TTS frost breath countdown", mod:IsTank())
 local ttsFrostBreathCountdownOffset = 6.8
-local ttsBlisteringCountdown = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\icc\\sindy\\BlisteringCold_Soon.wav", "TTS blistering cold countdown", true)
+local ttsBlisteringCountdown = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\icc\\sindy\\BlisteringCold_Soon.wav", "TTS blistering cold soon", true)
 local ttsBlisteringCountdownOffset = 5
-
+local ttsAir = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\icc\\sindy\\AirPhase_Soon.wav", "TTS Air phase soon", true)
+local ttsBlistering = mod:NewSoundFile("Interface\\AddOns\\DBM-Core\\sounds\\icc\\lk\\RunOut.wav", "TTS Blistering Run out", true)
 
 local soundBlisteringCold = mod:NewSound(70123)
 mod:AddBoolOption("SetIconOnFrostBeacon", true)
@@ -112,6 +113,7 @@ function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
 	timerNextAirphase:Start(50-delay)
 	timerNextBlisteringCold:Start(33-delay)
+	ttsAir:Schedule(45-delay)
 	ttsBlisteringCountdown:Schedule(33-ttsBlisteringCountdownOffset)
 	warned_P2 = false
 	warnedfailed = false
@@ -155,6 +157,7 @@ function mod:OnCombatEnd()
 	end
 	ttsFrostBreathCountdown:Cancel()
 	ttsBlisteringCountdown:Cancel()
+	ttsAir:Cancel()
 end
 
 function mod:SPELL_CAST_START(args)
@@ -172,6 +175,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnFrostBeacon:Show()
 			ttsBeacon:Play()
+			SendChatMessage(L.YellBeacon, "SAY")
 		end
 		if self.vb.phase == 1 and self.Options.SetIconOnFrostBeacon then
 			table.insert(beaconIconTargets, DBM:GetRaidUnitId(args.destName))
@@ -258,6 +262,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(70117) then--Icy Grip Cast, not blistering cold, but adds an extra 1sec to the warning
 		warnBlisteringCold:Show()
 		specWarnBlisteringCold:Show()
+		ttsBlistering:Play()
 		timerBlisteringCold:Start()
 		timerNextBlisteringCold:Start()
 		ttsBlisteringCountdown:Schedule(67-ttsBlisteringCountdownOffset)
@@ -333,6 +338,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerNextBlisteringCold:Start(80)--Not exact anywhere from 80-110seconds after airphase begin
 		ttsBlisteringCountdown:Schedule(80-ttsBlisteringCountdownOffset)
 		timerNextAirphase:Start()
+		ttsAir:Schedule(105)
 		timerNextGroundphase:Start()
 		warnGroundphaseSoon:Schedule(40)
 		activeBeacons = true
