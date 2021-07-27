@@ -31,7 +31,7 @@ local timerGasSporeCD		= mod:NewNextTimer(40, 69279)		-- Every 40 seconds except
 local timerPungentBlight	= mod:NewNextTimer(33, 71219)		-- 33 seconds after 3rd stack of inhaled
 local timerInhaledBlight	= mod:NewNextTimer(34, 71912)		-- 34 seconds'ish
 local timerGastricBloat		= mod:NewTargetTimer(100, 72551, nil, mod:IsTank() or mod:IsHealer())	-- 100 Seconds until expired
-local timerGastricBloatCD	= mod:NewCDTimer(11, 72551, nil, mod:IsTank() or mod:IsHealer()) 		-- 10 to 14 seconds
+local timerGastricBloatCD	= mod:NewCDTimer(12, 72551, nil, mod:IsTank() or mod:IsHealer()) 		-- 10 to 14 seconds
 
 local berserkTimer			= mod:NewBerserkTimer(300)
 
