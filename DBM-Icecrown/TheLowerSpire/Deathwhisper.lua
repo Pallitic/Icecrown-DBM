@@ -120,7 +120,7 @@ function mod:OnCombatStart(delay)
 	timerAdds:Start(5)
 	ttsAddsCD:Play()
 	warnAddsSoon:Schedule(2)			-- 3sec pre-warning on start
-	self:ScheduleMethod(5, "addsTimer")
+	self:ScheduleMethod(7, "addsTimer")
 	if not mod:IsDifficulty("normal10") then
 		timerDominateMindCD:Start(28)		-- Sometimes 1 fails at the start, then the next will be applied 70 secs after start ?? :S
 		ttsDominateMindCD:Schedule(22)
@@ -192,7 +192,7 @@ function mod:addsTimer()
 	warnAddsSoon:Cancel()
 	if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
 		warnAddsSoon:Schedule(40)	-- 5 secs prewarning
-		self:ScheduleMethod(45, "addsTimer")
+		self:ScheduleMethod(47, "addsTimer")
 		timerAdds:Start(45)
 		ttsAddsCD:Schedule(40)
 	else
@@ -316,11 +316,12 @@ function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(70842) then
 		self.vb.phase = 2
 		warnPhase2:Show()
-		if mod:IsDifficulty("normal10") or mod:IsDifficulty("normal25") then
-			timerAdds:Cancel()
-			warnAddsSoon:Cancel()
-			ttsAddsCD:Cancel()
-			self:UnscheduleMethod("addsTimer")
+		timerAdds:Cancel()
+		ttsAddsCD:Cancel()
+		warnAddsSoon:Cancel()
+		self:UnscheduleMethod("addsTimer")
+		if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
+			self:ScheduleMethod(0.1, "addsTimer")
 		end
 	elseif args:IsSpellID(71289) and (self.Options.EnableOldAutoWeaponUnequipOnMC or self.Options.EnableAutoWeaponUnequipOnMC) and (mod:IsDifficulty("heroic25") or mod:IsDifficulty("heroic10")) then
 		self:equip()
