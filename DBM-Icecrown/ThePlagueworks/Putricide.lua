@@ -213,6 +213,7 @@ function mod:NextPhase()
 		timerSlimePuddleCD:Start(9)
 		timerMalleableGooCD:Start(9)
 		ttsGoocd:Schedule(6)
+		timerChokingGasBombCD:Start()
 		if mod:IsDifficulty("heroic10") or mod:IsDifficulty("heroic25") then
 			timerUnboundPlagueCD:Start(50)
 		end
